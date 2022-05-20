@@ -1,20 +1,24 @@
 ﻿using System;
+using NLog.Filters;
+using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc;
 
 namespace POS.ActionFilters
 {
-    using System.Web.Mvc;
+    
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public sealed class CustomValidateAntiForgeryTokenAttribute : FilterAttribute, IAuthorizationFilter
+    public sealed class CustomValidateAntiForgeryTokenAttribute : System.Web.Mvc.FilterAttribute, System.Web.Mvc.IAuthorizationFilter
     {
         /// <summary>
         /// The ValidateAntiForgeryTokenAttribute.
         /// </summary>
-        private ValidateAntiForgeryTokenAttribute Validator { get; set; }
+        private System.Web.Mvc.ValidateAntiForgeryTokenAttribute Validator { get; set; }
 
         /// <summary>
         /// The Accept Verbs Attribute.
         /// </summary>
-        private AcceptVerbsAttribute AcceptVerbsAttribute { get; set; }
+        private System.Web.Mvc.AcceptVerbsAttribute AcceptVerbsAttribute { get; set; }
 
         /// <summary>
         /// Gets the salt.
@@ -45,10 +49,10 @@ namespace POS.ActionFilters
             Verbs = verbs;
             Salt = salt;
 
-            AcceptVerbsAttribute = new AcceptVerbsAttribute(Verbs);
-            Validator = new ValidateAntiForgeryTokenAttribute
+            AcceptVerbsAttribute = new System.Web.Mvc.AcceptVerbsAttribute(Verbs);
+            Validator = new System.Web.Mvc.ValidateAntiForgeryTokenAttribute
             {
-                Salt = Salt
+                //Salt = salt
             };
         }
 
@@ -73,6 +77,11 @@ namespace POS.ActionFilters
             {
                 Validator.OnAuthorization(filterContext);
             }
+        }
+
+        public void OnAuthorization(AuthorizationFilterContext context)
+        {
+            throw new NotImplementedException();
         }
     }
 }

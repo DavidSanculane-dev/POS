@@ -11,6 +11,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using POS.Domain.Properties;
 
 namespace POS.Domain.Validators
@@ -53,5 +55,9 @@ namespace POS.Domain.Validators
         }
 
         #endregion
+    }
+
+    internal interface IClientValidatable
+    {
     }
 }

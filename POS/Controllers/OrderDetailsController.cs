@@ -8,17 +8,15 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Web.Mvc;
-
+    using MvcContrib.UI.Grid;
     using POS.CustomExtensions;
     using POS.Domain.Model;
     using POS.Infrastructure;
     using POS.Models;
 
-    using Telerik.Web.Mvc;
-
     #endregion
 
-    public class OrderDetailsController : Controller
+    public class OrderDetailsController : System.Web.Mvc.Controller
     {
         #region Fields
 
@@ -506,6 +504,11 @@
             return View(new GridModel(model));
         }
 
+        private ActionResult View<T>(GridModel<T> gridModel) where T : class
+        {
+            throw new NotImplementedException();
+        }
+
         [GridAction]
         public ActionResult _EstablishmentSalesReport(int id)
         {
@@ -557,5 +560,9 @@
         }
 
         #endregion
+    }
+
+    internal class GridActionAttribute : Attribute
+    {
     }
 }

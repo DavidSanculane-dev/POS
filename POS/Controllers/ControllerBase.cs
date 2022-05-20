@@ -31,6 +31,16 @@
             }
         }
 
+        private class CustomValidateAntiForgeryTokenAttribute : Attribute
+        {
+            public CustomValidateAntiForgeryTokenAttribute(HttpVerbs post)
+            {
+                Post = post;
+            }
+
+            public HttpVerbs Post { get; }
+        }
+
         #endregion
     }
 }
